@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: Dojo's base config</title>
+    <link rel="stylesheet" href="dijit/themes/claro/claro.css" />
+</head>
+
+<body class="claro">
+    <!-- configure Dojo -->
+    <script>
+        dojoConfig = {
+            has: {
+                "dojo-firebug": true
+            },
+            app: {
+                userName: "Marwan"
+            }
+        };
+    </script>
+
+    <!-- load Dojo -->
+    <script src="dojo/dojo.js"></script>
+
+    <!-- use dojo -->
+    <script>
+        require(["dijit/Dialog",
+            "dijit/registry",
+            "dojo/parser",
+            "dojo/_base/lang",
+            "dojo/json",
+            "dojo/_base/config",
+            "dojo/io-query",
+            "demo/myModule",
+            "rx/Rx.min.js",
+            "dojo/domReady!"],
+            function (Dialog, registry, parser, lang, JSON, config, ioQuery, myModule, Rx) {
+
+                // Read configurations from the query string and add it to the app config
+                var queryParams = ioQuery.queryToObject(location.search.substring(1));
+                lang.mixin(config.app, queryParams);
+
+                // Create a dialog
+                var dialog = new Dialog({
+                    title: "Welcome back " + config.app.userName,
+                    content: "<pre>" + JSON.stringify(config, null, "\t") + "</pre>"
+                });
+
+                // Show Dojo's dialog box with all the information we gathered above
+                dialog.show();
+
+
+                var ob = Rx.Observable.timer(1, 1000)
+                
+                ob.subscribe(x => {
+                    console.log(x);
+                })
+
+            });
+    </script>
+    <!-- Dojo sucks ... -->
+</body>
+
+</html>
