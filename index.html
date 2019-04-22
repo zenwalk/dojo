@@ -16,7 +16,16 @@
             },
             app: {
                 userName: "Marwan"
-            }
+            },
+            // map: {
+            //     "*": {
+            //         "Rx": "rx/rx.min"
+            //     }
+            // },
+            paths: {
+                "Rx": '../rx/rx.min'
+            },
+async: true,
         };
     </script>
 
@@ -26,6 +35,7 @@
     <!-- use dojo -->
     <script>
         require(["dijit/Dialog",
+        "demo/myDialog",
             "dijit/registry",
             "dojo/parser",
             "dojo/_base/lang",
@@ -33,10 +43,9 @@
             "dojo/_base/config",
             "dojo/io-query",
             "demo/myModule",
-            "rx/Rx.min.js",
+            "Rx",
             "dojo/domReady!"],
-            function (Dialog, registry, parser, lang, JSON, config, ioQuery, myModule, Rx) {
-
+            function (Dialog, myDialog, registry, parser, lang, JSON, config, ioQuery, myModule, Rx) {
                 // Read configurations from the query string and add it to the app config
                 var queryParams = ioQuery.queryToObject(location.search.substring(1));
                 lang.mixin(config.app, queryParams);
@@ -50,8 +59,10 @@
                 // Show Dojo's dialog box with all the information we gathered above
                 dialog.show();
 
+var my = new myDialog();
+my.show()
 
-                var ob = Rx.Observable.timer(1, 1000)
+                var ob = Rx.Observable.timer(1, 500).take(6)
                 
                 ob.subscribe(x => {
                     console.log(x);

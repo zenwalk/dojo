@@ -1,0 +1,18 @@
+<div class="dijitDialog" role="dialog" aria-labelledby="${id}_title">
+    <div data-dojo-attach-point="titleBar" class="dijitDialogTitleBar">
+        <span data-dojo-attach-point="titleNode" class="dijitDialogTitle" id="${id}_title"
+              role="header" level="1"></span>
+        <span style="display: none;" data-dojo-attach-point="closeButtonNode" class="dijitDialogCloseIcon"
+              data-dojo-attach-event="ondijitclick: onCancel" title="${buttonCancel}" role="button" tabIndex="-1">
+            <span data-dojo-attach-point="closeText" class="closeText" title="${buttonCancel}">x</span>
+        </span>
+    </div>
+    <div data-dojo-attach-point="containerNode" class="dijitDialogPaneContent">
+        <select multiple="true" name="multiselect" data-dojo-type="dojox.form.CheckedMultiSelect">
+            <option value="VA" selected="selected">Virginia</option>
+            <option value="WA" selected="selected">Washington</option>
+            <option value="FL">Florida</option>
+            <option value="CA">California</option>
+        </select>
+    </div>
+</div>
